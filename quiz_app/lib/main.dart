@@ -52,11 +52,18 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text('First App'),
       ),
-      body: Column(
-        children: [
-          Question(questions[_Index]['question'] as String),
-        ],
-      ),
+      body: _Index < questions.length
+          ? Column(
+              children: [
+                Question(questions[_Index]['question'] as String),
+                ...(questions[_Index]["answer"] as List).map((answer) {
+                  return Answer(answerHandler: chooseAnswer, text: answer);
+                }).toList(),
+              ],
+            )
+          : Center(
+              child: Text("You did it!"),
+            ),
     ));
   }
 }
