@@ -16,9 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          fontFamily: "Quicksand",
+          appBarTheme: AppBarTheme(
+            titleTextStyle: TextStyle(fontFamily: "OpenSans", fontSize: 20),
+          )),
       home: MyHomePage(),
     );
   }
@@ -31,13 +34,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [
-    Transaction(
-        id: "t1", title: "New Shoes", amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: "t2",
-        title: "Weekly Groceries",
-        amount: 16.53,
-        date: DateTime.now()),
+    // Transaction(
+    //     id: "t1", title: "New Shoes", amount: 69.99, date: DateTime.now()),
+    // Transaction(
+    //     id: "t2",
+    //     title: "Weekly Groceries",
+    //     amount: 16.53,
+    //     date: DateTime.now()),
   ];
 
   void _addNewTransaction(String inputTitle, double inputAmount) {
@@ -69,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () => newTransactionPopup(context),
               icon: const Icon(
                 Icons.add,
                 color: Colors.white,
@@ -84,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.purple,
-          onPressed: () {},
+          onPressed: () => newTransactionPopup(context),
           child: const Icon(
             Icons.add,
             color: Colors.white,
