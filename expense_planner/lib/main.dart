@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/widgets/chart.dart';
+import 'package:quiz_app/widgets/chart/chart.dart';
 
 import './widgets/transaction_list.dart';
 import './widgets/new_transactions.dart';
