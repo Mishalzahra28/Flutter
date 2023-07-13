@@ -34,15 +34,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [
-    // Transaction(
-    //     id: "t1", title: "New Shoes", amount: 69.99, date: DateTime.now()),
-    // Transaction(
-    //     id: "t2",
-    //     title: "Weekly Groceries",
-    //     amount: 16.53,
-    //     date: DateTime.now()),
-  ];
+  final List<Transaction> _transactions = [];
   List<Transaction> get _recentTransactions {
     return _transactions.where((tx) {
       return tx.date.isAfter(DateTime.now().subtract(
@@ -51,12 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String inputTitle, double inputAmount) {
+  void _addNewTransaction(
+      String inputTitle, double inputAmount, DateTime chosenDate) {
     final newTx = Transaction(
         id: DateTime.now().toString(),
         title: inputTitle,
         amount: inputAmount,
-        date: DateTime.now());
+        date: chosenDate);
     setState(() {
       _transactions.add(newTx);
     });
@@ -68,6 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (_) {
           return NewTransaction(addTransaction: _addNewTransaction);
         });
+  }
+
+  void deleteTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tx) => tx.id == id);
+    });
   }
 
   @override
@@ -93,8 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Chart(recentTransactions: _recentTransactions),
           TransactionList(
-            transactions: _transactions,
-          ),
+              transactions: _transactions, deleteHandler: deleteTransaction),
         ],
       )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

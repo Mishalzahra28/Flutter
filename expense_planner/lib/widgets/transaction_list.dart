@@ -5,13 +5,13 @@ import "../models/transaction.dart";
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
-  const TransactionList({super.key, required this.transactions});
-
-  @override
+  final Function deleteHandler;
+  TransactionList(
+      {super.key, required this.transactions, required this.deleteHandler});
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: MediaQuery.of(context).size.height * 06,
       width: double.infinity,
       child: transactions.isEmpty
           ? Column(
@@ -53,50 +53,15 @@ class TransactionList extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     subtitle: Text(
-                      DateFormat.yMMMMd()
-                          .add_jm()
-                          .format(transactions[index].date),
+                      DateFormat.yMMMMd().format(transactions[index].date),
                       style: const TextStyle(color: Colors.grey, fontSize: 14),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () => deleteHandler(transactions[index].id),
                     ),
                   ),
                 );
-                // return Card(
-                //     child: Row(
-                //   children: [
-                //     Container(
-                //         margin: const EdgeInsets.symmetric(
-                //             vertical: 10, horizontal: 15),
-                //         decoration: BoxDecoration(
-                //             border: Border.all(color: Colors.purple, width: 1)),
-                //         child: Padding(
-                //           padding: const EdgeInsets.all(8.0),
-                //           child: Text(
-                //             "\$${transactions[index].amount.toStringAsFixed(2)}",
-                //             style: const TextStyle(
-                //                 fontWeight: FontWeight.bold,
-                //                 color: Colors.purple,
-                //                 fontSize: 20),
-                //           ),
-                //         )),
-                //     Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         Text(
-                //           transactions[index].title,
-                //           style: TextStyle(
-                //               fontWeight: FontWeight.bold, fontSize: 17),
-                //         ),
-                //         Text(
-                //           DateFormat.yMMMMd()
-                //               .add_jm()
-                //               .format(transactions[index].date),
-                //           style:
-                //               const TextStyle(color: Colors.grey, fontSize: 14),
-                //         )
-                //       ],
-                //     )
-                //   ],
-                // ));
               },
               itemCount: transactions.length,
             ),
