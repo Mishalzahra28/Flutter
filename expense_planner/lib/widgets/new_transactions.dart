@@ -24,6 +24,7 @@ class _NewTransactionState extends State<NewTransaction> {
       return;
     }
     widget.addTransaction(enteredTitle, enteredAmount, selectedDate);
+    print("Transaction added");
     Navigator.of(context).pop();
   }
 
@@ -35,10 +36,7 @@ class _NewTransactionState extends State<NewTransaction> {
       lastDate: DateTime.now(),
     ).then((pickedDate) => {
           if (pickedDate == null)
-            {
-              // print("nooo date chosen")
-              selectedDate == null
-            }
+            {selectedDate == null}
           else
             {
               setState(() {
@@ -59,14 +57,12 @@ class _NewTransactionState extends State<NewTransaction> {
           children: [
             TextField(
               controller: titleController,
-              // onSubmitted: (_) => submitHandler(),
               decoration: const InputDecoration(labelText: "Title"),
             ),
             TextField(
               controller: amountController,
               decoration: const InputDecoration(labelText: "Amount"),
               keyboardType: TextInputType.number,
-              // onSubmitted: (_) => submitHandler(),
             ),
             Row(
               children: [
