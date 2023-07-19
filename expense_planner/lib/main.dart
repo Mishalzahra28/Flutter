@@ -35,6 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
+  bool _showCharts = false;
   List<Transaction> get _recentTransactions {
     return _transactions.where((tx) {
       return tx.date.isAfter(DateTime.now().subtract(
@@ -91,20 +92,36 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
           child: Column(
         children: [
-          Container(
-              height: (MediaQuery.of(context).size.height -
-                      appbar.preferredSize.height -
-                      MediaQuery.of(context).padding.top) *
-                  0.3,
-              child: Chart(recentTransactions: _recentTransactions)),
-          Container(
-            height: (MediaQuery.of(context).size.height -
-                    appbar.preferredSize.height -
-                    MediaQuery.of(context).padding.top) *
-                0.7,
-            child: TransactionList(
-                transactions: _transactions, deleteHandler: deleteTransaction),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Show Chart"),
+              Switch(
+                value: _showCharts,
+                onChanged: (val) {
+                  setState(() {
+                    _showCharts = val;
+                  });
+                },
+              )
+            ],
           ),
+          _showCharts
+              ? Container(
+                  height: (MediaQuery.of(context).size.height -
+                          appbar.preferredSize.height -
+                          MediaQuery.of(context).padding.top) *
+                      0.7,
+                  child: Chart(recentTransactions: _recentTransactions))
+              : Container(
+                  height: (MediaQuery.of(context).size.height -
+                          appbar.preferredSize.height -
+                          MediaQuery.of(context).padding.top) *
+                      0.7,
+                  child: TransactionList(
+                      transactions: _transactions,
+                      deleteHandler: deleteTransaction),
+                ),
         ],
       )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

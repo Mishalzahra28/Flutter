@@ -14,22 +14,24 @@ class TransactionList extends StatelessWidget {
       // height: MediaQuery.of(context).size.height * 0.75,
       width: double.infinity,
       child: transactions.isEmpty
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/images/waiting.png",
-                  height: 200,
-                  // fit: BoxFit.cover,
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  "No Expenses Yet",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )
-              ],
-            )
+          ? LayoutBuilder(builder: ((context, constraints) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/waiting.png",
+                    height: constraints.maxHeight * 0.6,
+                    // fit: BoxFit.cover,
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    "No Expenses Yet",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                ],
+              );
+            }))
           : ListView.builder(
               itemBuilder: (context, index) {
                 return Card(
