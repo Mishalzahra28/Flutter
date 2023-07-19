@@ -28,101 +28,109 @@ class Chart extends StatelessWidget {
   }
 
   double get totalSpending {
-    // print(
-    // "${groupedTransactionValues[6]["day"]}.................${groupedTransactionValues[0]["amount"]}.................${groupedTransactionValues[0]["day"]}");
     return groupedTransactionValues.fold(0.1, (sum, item) {
-      // print("${sum + (item['amount'] as num)}_______________________________");
       return sum + (item['amount'] as num);
     });
   }
 
-  void display() {
-    print("Groupeddd:${groupedTransactionValues[0]["amount"] as double}");
-    print("TOTAL SPENDING:${totalSpending}");
-    print(
-        "DIVISION:${(groupedTransactionValues[0]["amount"] as double) / totalSpending}");
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 6,
-        margin: EdgeInsets.all(20),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Flexible(
-              fit: FlexFit.tight,
-              child: ChartBars(
-                  label: (groupedTransactionValues[0]["day"] as String),
-                  amount: (groupedTransactionValues[0]["amount"] as double),
-                  percentage: totalSpending == 0
-                      ? 0.0
-                      : (groupedTransactionValues[0]["amount"] as double) /
-                          totalSpending),
-            ),
-            Flexible(
-              fit: FlexFit.tight,
-              child: ChartBars(
-                  label: (groupedTransactionValues[1]["day"] as String),
-                  amount: (groupedTransactionValues[1]["amount"] as double),
-                  percentage: totalSpending == 0
-                      ? 0.0
-                      : (groupedTransactionValues[1]["amount"] as double) /
-                          totalSpending),
-            ),
-            Flexible(
-              fit: FlexFit.tight,
-              child: ChartBars(
-                  label: (groupedTransactionValues[2]["day"] as String),
-                  amount: (groupedTransactionValues[2]["amount"] as double),
-                  percentage: totalSpending == 0
-                      ? 0.0
-                      : (groupedTransactionValues[2]["amount"] as double) /
-                          totalSpending),
-            ),
-            Flexible(
-              fit: FlexFit.tight,
-              child: ChartBars(
-                  label: (groupedTransactionValues[3]["day"] as String),
-                  amount: (groupedTransactionValues[3]["amount"] as double),
-                  percentage: totalSpending == 0
-                      ? 0.0
-                      : (groupedTransactionValues[3]["amount"] as double) /
-                          totalSpending),
-            ),
-            Flexible(
-              fit: FlexFit.tight,
-              child: ChartBars(
-                  label: (groupedTransactionValues[4]["day"] as String),
-                  amount: (groupedTransactionValues[4]["amount"] as double),
-                  percentage: totalSpending == 0
-                      ? 0.0
-                      : (groupedTransactionValues[4]["amount"] as double) /
-                          totalSpending),
-            ),
-            Flexible(
-              fit: FlexFit.tight,
-              child: ChartBars(
-                  label: (groupedTransactionValues[5]["day"] as String),
-                  amount: (groupedTransactionValues[5]["amount"] as double),
-                  percentage: totalSpending == 0
-                      ? 0.0
-                      : (groupedTransactionValues[5]["amount"] as double) /
-                          totalSpending),
-            ),
-            Flexible(
-              fit: FlexFit.tight,
-              child: ChartBars(
-                  label: (groupedTransactionValues[6]["day"] as String),
-                  amount: (groupedTransactionValues[6]["amount"] as double),
-                  percentage: totalSpending == 0
-                      ? 0.0
-                      : (groupedTransactionValues[6]["amount"] as double) /
-                          totalSpending),
-            ),
-          ]),
-        ));
+    return Container(
+      // height: MediaQuery.of(context).size.height * 0.25,
+      child: Card(
+          elevation: 6,
+          margin: EdgeInsets.all(20),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBars(
+                        label: (groupedTransactionValues[0]["day"] as String),
+                        amount:
+                            (groupedTransactionValues[0]["amount"] as double),
+                        percentage: totalSpending == 0
+                            ? 0.0
+                            : (groupedTransactionValues[0]["amount"]
+                                    as double) /
+                                totalSpending),
+                  ),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBars(
+                        label: (groupedTransactionValues[1]["day"] as String),
+                        amount:
+                            (groupedTransactionValues[1]["amount"] as double),
+                        percentage: totalSpending == 0
+                            ? 0.0
+                            : (groupedTransactionValues[1]["amount"]
+                                    as double) /
+                                totalSpending),
+                  ),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBars(
+                        label: (groupedTransactionValues[2]["day"] as String),
+                        amount:
+                            (groupedTransactionValues[2]["amount"] as double),
+                        percentage: totalSpending == 0
+                            ? 0.0
+                            : (groupedTransactionValues[2]["amount"]
+                                    as double) /
+                                totalSpending),
+                  ),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBars(
+                        label: (groupedTransactionValues[3]["day"] as String),
+                        amount:
+                            (groupedTransactionValues[3]["amount"] as double),
+                        percentage: totalSpending == 0
+                            ? 0.0
+                            : (groupedTransactionValues[3]["amount"]
+                                    as double) /
+                                totalSpending),
+                  ),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBars(
+                        label: (groupedTransactionValues[4]["day"] as String),
+                        amount:
+                            (groupedTransactionValues[4]["amount"] as double),
+                        percentage: totalSpending == 0
+                            ? 0.0
+                            : (groupedTransactionValues[4]["amount"]
+                                    as double) /
+                                totalSpending),
+                  ),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBars(
+                        label: (groupedTransactionValues[5]["day"] as String),
+                        amount:
+                            (groupedTransactionValues[5]["amount"] as double),
+                        percentage: totalSpending == 0
+                            ? 0.0
+                            : (groupedTransactionValues[5]["amount"]
+                                    as double) /
+                                totalSpending),
+                  ),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBars(
+                        label: (groupedTransactionValues[6]["day"] as String),
+                        amount:
+                            (groupedTransactionValues[6]["amount"] as double),
+                        percentage: totalSpending == 0
+                            ? 0.0
+                            : (groupedTransactionValues[6]["amount"]
+                                    as double) /
+                                totalSpending),
+                  ),
+                ]),
+          )),
+    );
   }
 }

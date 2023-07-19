@@ -71,28 +71,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Expense Planner",
-          style: TextStyle(color: Colors.white),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () => newTransactionPopup(context),
-              icon: const Icon(
-                Icons.add,
-                color: Colors.white,
-              ))
-        ],
-        backgroundColor: Colors.purple,
+    final appbar = AppBar(
+      title: const Text(
+        "Expense Planner",
+        style: TextStyle(color: Colors.white),
       ),
+      actions: [
+        IconButton(
+            onPressed: () => newTransactionPopup(context),
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ))
+      ],
+      backgroundColor: Colors.purple,
+    );
+    return Scaffold(
+      appBar: appbar,
       body: SingleChildScrollView(
           child: Column(
         children: [
-          Chart(recentTransactions: _recentTransactions),
-          TransactionList(
-              transactions: _transactions, deleteHandler: deleteTransaction),
+          Container(
+              height: (MediaQuery.of(context).size.height -
+                      appbar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.3,
+              child: Chart(recentTransactions: _recentTransactions)),
+          Container(
+            height: (MediaQuery.of(context).size.height -
+                    appbar.preferredSize.height -
+                    MediaQuery.of(context).padding.top) *
+                0.7,
+            child: TransactionList(
+                transactions: _transactions, deleteHandler: deleteTransaction),
+          ),
         ],
       )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
