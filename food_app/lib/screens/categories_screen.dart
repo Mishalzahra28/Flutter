@@ -45,15 +45,21 @@ class CategoriesScreen extends StatelessWidget {
                   child: Text(
                       "Delicious recipes at your fingertips - savor every bite with our food recipe app!"),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Text(
-                    "Categories",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
-                    textAlign: TextAlign.left,
+                const Text(
+                  "Categories",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
                   ),
+                  textAlign: TextAlign.left,
                 ),
-                ListView(
+                GridView(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 3 / 2,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20),
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   children: DUMMY_CATEGORIES
@@ -61,7 +67,7 @@ class CategoriesScreen extends StatelessWidget {
                             title: catData.title,
                             description: catData.description,
                             imageURL: catData.imageURL,
-                            color: catData.color,
+                            // color: catData.color,
                           ))
                       .toList(),
                 ),

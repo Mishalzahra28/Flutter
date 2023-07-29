@@ -1,38 +1,46 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
   final String description;
   final String imageURL;
-  final Color color;
+  // final Color color;
   const CategoryItem(
       {required this.title,
-      required this.color,
+      // this.color = Color.fromARGB(255, 11, 72, 66),
       required this.description,
       required this.imageURL});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          gradient: LinearGradient(
-              colors: [color.withOpacity(0.5), color],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight)),
-      child: ListTile(
-        leading: Image.asset(
-          imageURL,
-          height: 50,
-          width: 50,
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          gradient: LinearGradient(colors: [
+            Color.fromARGB(255, 249, 217, 151).withOpacity(0.3),
+            Color.fromARGB(255, 249, 217, 151)
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+      child: Column(children: [
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Image.asset(
+            imageURL,
+            height: 50,
+            width: 50,
+          ),
         ),
-        title: Text(
+        Text(
           title,
-          style: TextStyle(fontSize: 15),
+          style: TextStyle(fontSize: 20),
         ),
-        subtitle: Text(description, style: TextStyle(fontSize: 10)),
-      ),
+        Text(description,
+            style: TextStyle(
+              fontSize: 10,
+            )),
+      ]),
     );
   }
 }
