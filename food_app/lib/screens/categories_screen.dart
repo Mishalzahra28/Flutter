@@ -29,7 +29,7 @@ class CategoriesScreen extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.2),
                           spreadRadius: 4,
                           blurRadius: 10,
-                          offset: Offset(10, 10),
+                          offset: const Offset(10, 10),
                         ),
                       ],
                     ),
@@ -54,21 +54,20 @@ class CategoriesScreen extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
                 GridView(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 200,
                       childAspectRatio: 3 / 2,
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 20),
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   children: DUMMY_CATEGORIES
                       .map((catData) => CategoryItem(
-                            title: catData.title,
-                            description: catData.description,
-                            imageURL: catData.imageURL,
-                            // color: catData.color,
-                          ))
+                          title: catData.title,
+                          description: catData.description,
+                          imageURL: catData.imageURL,
+                          id: catData.id))
                       .toList(),
                 ),
                 // )
