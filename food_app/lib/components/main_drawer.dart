@@ -36,7 +36,7 @@ class MainDrawer extends StatelessWidget {
         ListTile(
           tileColor: Colors.grey.shade200,
           leading: Icon(Icons.settings),
-          title: Text("Settings"),
+          title: Text("Filters"),
           onTap: () {
             Navigator.of(context).pushReplacementNamed('/filters');
           },

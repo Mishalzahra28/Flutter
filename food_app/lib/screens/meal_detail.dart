@@ -4,7 +4,10 @@ import "../dummy_data.dart";
 
 class MealDetails extends StatelessWidget {
   static const routeName = '/meal-detial';
-  const MealDetails({super.key});
+  final Function toggleFavorite;
+  final Function isFavorite;
+  const MealDetails(
+      {super.key, required this.toggleFavorite, required this.isFavorite});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class MealDetails extends StatelessWidget {
                                   children: [
                                     Text(
                                       selectedMeal.title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w700),
                                       textAlign: TextAlign.left,
                                     ),
@@ -61,7 +64,14 @@ class MealDetails extends StatelessWidget {
                                       Text('${selectedMeal.duration} min'),
                                     ]),
                                   ]),
-                              const Icon(Icons.bookmark)
+                              GestureDetector(
+                                  onTap: () => toggleFavorite(mealId),
+                                  child: isFavorite(mealId)
+                                      ? const Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                        )
+                                      : const Icon(Icons.star_border_outlined))
                             ]),
                       ),
                     ),

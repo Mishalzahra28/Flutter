@@ -28,27 +28,43 @@ class _MyAppState extends State<MyApp> {
     "lactose": false
   };
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> favoriteMeals = [];
 
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
-      filterData = filters;
+      filters = filterData;
 
       _availableMeals = DUMMY_MEALS.where((meal) {
-        if (filterData['gluten']! && !meal.isGlutenFree) {
+        if (filters['gluten']! && !meal.isGlutenFree) {
           return false;
         }
-        if (filterData['lactose']! && !meal.isLactoseFree) {
+        if (filters['lactose']! && !meal.isLactoseFree) {
           return false;
         }
-        if (filterData['vegan']! && !meal.isVegan) {
+        if (filters['vegan']! && !meal.isVegan) {
           return false;
         }
-        if (filterData['vegetarian']! && !meal.isVegetarian) {
+        if (filters['vegetarian']! && !meal.isVegetarian) {
           return false;
         }
         return true;
       }).toList();
     });
+  }
+
+  void _toggleFavorite(String mealId) {
+    final existingIndex = favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      favoriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+    }
+  }
+
+  bool _isFavorite(id) {
+    return favoriteMeals.any((meal) => meal.id == id);
   }
 
   @override
@@ -62,11 +78,16 @@ class _MyAppState extends State<MyApp> {
         // home: CategoriesScreen(),
         initialRoute: '/',
         routes: {
-          '/': (ctx) => TabScreen(),
+          '/': (ctx) => TabScreen(
+                favoriteMeals: favoriteMeals,
+              ),
           MealsScreen.routeName: (ctx) => MealsScreen(_availableMeals),
-          MealDetails.routeName: (ctx) => MealDetails(),
+          MealDetails.routeName: (ctx) => MealDetails(
+                toggleFavorite: _toggleFavorite,
+                isFavorite: _isFavorite,
+              ),
           FilterScreen.routeName: (ctx) =>
-              FilterScreen(saveFilters: _setFilters)
+              FilterScreen(saveFilters: _setFilters, currentFilters: filters)
         });
   }
 }
