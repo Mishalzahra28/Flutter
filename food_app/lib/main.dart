@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+
+import "./dummy_data.dart";
+import "./models/meal.dart";
+
 import "./screens/categories_screen.dart";
 import './screens/category_meals_screen.dart';
 import './screens/meal_detail.dart';
@@ -23,8 +27,29 @@ class _MyAppState extends State<MyApp> {
     "vegan": false,
     "lactose": false
   };
+  List<Meal> _availableMeals = DUMMY_MEALS;
 
-  void _setFilters(Map<String, bool> filterData) {}
+  void _setFilters(Map<String, bool> filterData) {
+    setState(() {
+      filterData = filters;
+
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        if (filters['gluten']! && !meal.isGlutenFree) {
+          return false;
+        }
+        if (filters['lactose']! && !meal.isLactoseFree) {
+          return false;
+        }
+        if (filters['vegan']! && !meal.isVegan) {
+          return false;
+        }
+        if (filters['vegetarian']! && !meal.isVegetarian) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +63,7 @@ class _MyAppState extends State<MyApp> {
         initialRoute: '/',
         routes: {
           '/': (ctx) => TabScreen(),
-          MealsScreen.routeName: (ctx) => MealsScreen(),
+          MealsScreen.routeName: (ctx) => MealsScreen(_availableMeals),
           MealDetails.routeName: (ctx) => MealDetails(),
           FilterScreen.routeName: (ctx) =>
               FilterScreen(saveFilters: _setFilters)
