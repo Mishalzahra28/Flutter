@@ -8,17 +8,8 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "CookItUp",
-            style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.w700, color: Colors.white),
-          ),
-          backgroundColor: Colors.redAccent,
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
+    return SingleChildScrollView(
+        child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
@@ -72,8 +63,6 @@ class CategoriesScreen extends StatelessWidget {
                 ),
                 // )
               ],
-            ),
-          ),
-        ));
+            )));
   }
 }
