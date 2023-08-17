@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import "../providers/product_provider.dart";
 
 class ProductDetailScreen extends StatelessWidget {
   static const routeName = "/product-detail";
@@ -6,11 +9,31 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = ModalRoute.of(context)!.settings.arguments as String;
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final loadedItem =
+        Provider.of<ProductProvider>(context, listen: false).getItem(productId);
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(child: Text("Detailss")),
+      appBar: AppBar(title: Text(loadedItem.title)),
+      body: Column(children: [
+        Container(
+          child: Image.network(
+            loadedItem.imageUrl,
+            height: 300,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          '\$${loadedItem.price}',
+          style: TextStyle(fontSize: 15),
+        ),
+        const SizedBox(height: 5),
+        Text(loadedItem.description)
+      ]),
     );
   }
 }
