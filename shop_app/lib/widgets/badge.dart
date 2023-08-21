@@ -23,7 +23,7 @@ class CustomBadge extends StatelessWidget {
             // color: Theme.of(context).accentColor,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Colors.redAccent,
+              color: Colors.orangeAccent,
             ),
             constraints: BoxConstraints(
               minWidth: 16,
@@ -32,9 +32,7 @@ class CustomBadge extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 10,
-              ),
+              style: TextStyle(fontSize: 10, color: Colors.black),
             ),
           ),
         )

@@ -26,7 +26,7 @@ class ProdcutItem extends StatelessWidget {
             backgroundColor: Colors.black54,
             leading: Consumer<Product>(
               builder: (context, product, child) => IconButton(
-                color: Colors.amber,
+                color: Colors.orangeAccent,
                 icon: Icon(product.isFavorite
                     ? Icons.favorite
                     : Icons.favorite_border),
@@ -43,8 +43,23 @@ class ProdcutItem extends StatelessWidget {
               icon: Icon(Icons.shopping_cart),
               onPressed: () {
                 cart.addItem(product.id, product.title, product.price);
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text(
+                      "Added Item to Cart",
+                      textAlign: TextAlign.center,
+                    ),
+                    action: SnackBarAction(
+                        label: "UNDO",
+                        textColor: Colors.orangeAccent,
+                        onPressed: () {
+                          cart.removeSingleItem(product.id);
+                        }),
+                  ),
+                );
               },
-              color: Colors.amber,
+              color: Colors.orangeAccent,
             ),
           ),
           child: Image.network(

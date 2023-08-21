@@ -6,35 +6,84 @@ class ProductProvider with ChangeNotifier {
   final List<Product> _items = [
     Product(
       id: 'p1',
-      title: 'Red Shirt',
-      description: 'A red shirt - it is pretty red!',
+      title: 'White Shirt',
+      description: 'A white shirt - it is pretty neat!',
       price: 29.99,
       imageUrl:
-          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://i.pinimg.com/236x/91/c9/46/91c946a57252c6c2729289e5ebaa5637.jpg',
     ),
     Product(
       id: 'p2',
-      title: 'Trousers',
-      description: 'A nice pair of trousers.',
-      price: 59.99,
+      title: 'Grey Solid Pants',
+      description: 'You are good to go with these solid pants!',
+      price: 39.99,
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzBkAGfu-BXRHZc3QYwHyiNRRHNHFAxnWK-sJtIf6fZMIW-PHMlGarKOmTOFesk1mmeb4&usqp=CAU',
     ),
     Product(
       id: 'p3',
-      title: 'Yellow Scarf',
-      description: 'Warm and cozy - exactly what you need for the winter.',
-      price: 19.99,
+      title: 'Brown T-shirt',
+      description: 'A nice brown t-shirt.',
+      price: 35.99,
       imageUrl:
-          'https://live.staticflickr.com/4043/4438260868_cc79b3369d_z.jpg',
+          'https://i.pinimg.com/236x/cc/f2/50/ccf25098b3b44305868c6ccfef122842.jpg',
     ),
     Product(
       id: 'p4',
-      title: 'A Pan',
-      description: 'Prepare any meal you want.',
+      title: 'Block Stitching T-shirt',
+      description: 'Warm and cozy - exactly what you need for the winter.',
+      price: 19.99,
+      imageUrl:
+          'https://lzd-img-global.slatic.net/g/p/08e264ef742567641776019ec82d9fc9.jpg_720x720q80.jpg_.webp',
+    ),
+    Product(
+      id: 'p5',
+      title: "Fred's Alpha Shirt",
+      description: 'Wear anywhere T-shirt!',
+      price: 28.50,
+      imageUrl:
+          'https://m.media-amazon.com/images/I/51+Sp3R0S+L._AC_SY500_.jpg',
+    ),
+    Product(
+      id: 'p6',
+      title: "High Waist Trousers",
+      description: 'Black Trousers for casual wear!',
+      price: 47.50,
+      imageUrl:
+          'https://images.stylishop.com/media/catalog/product/7005128701/images/7005128701_1.jpg?v=1',
+    ),
+    Product(
+      id: 'p7',
+      title: "Block T-shirt",
+      description: 'Cozy T0shirt with block design',
+      price: 18.25,
+      imageUrl:
+          'https://down-sg.img.susercontent.com/file/sg-11134201-7qvf8-li3xwqhnnx1pf8',
+    ),
+    Product(
+      id: 'p8',
+      title: "Basic Burgundy T-shirt",
+      description: 'For plain days and events',
+      price: 39.99,
+      imageUrl:
+          'https://1746b291a6740af9.kinxzone.com/upload/images/product/105/105319/Product_1618526279670.jpg',
+    ),
+    Product(
+      id: 'p9',
+      title: "Linen wide leg Pants",
+      description:
+          'These dusty pink, wide leg, mid-rise pants have faux wooden button, pocket and zip & hook for closure..',
+      price: 26.59,
+      imageUrl:
+          'https://www.fablestreet.com/cdn/shop/products/Linen_20Wide_20Leg_20Pants_20-_20Dusty_20Pink_L2_1350x.jpg?v=1615470874',
+    ),
+    Product(
+      id: 'p10',
+      title: "Beige Solid Pants",
+      description: 'Beige goes with everything!.',
       price: 49.99,
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+          'https://images-static.nykaa.com/media/catalog/product/b/0/b048beaBT0721_1.jpg?tr=w-500,pr-true',
     ),
   ];
 

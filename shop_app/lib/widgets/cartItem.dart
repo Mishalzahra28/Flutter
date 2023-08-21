@@ -31,6 +31,26 @@ class CartWidget extends StatelessWidget {
           size: 30,
         ),
       ),
+      confirmDismiss: (direction) async {
+        return await showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: Icon(Icons.warning),
+                  content: Text("Do oyu want to delete this item?"),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                        child: Text("Cancel")),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        child: Text("Delete")),
+                  ],
+                ));
+      },
       direction: DismissDirection.endToStart,
       onDismissed: (direction) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
@@ -41,7 +61,7 @@ class CartWidget extends StatelessWidget {
           padding: EdgeInsets.all(8),
           child: ListTile(
             leading: CircleAvatar(
-              backgroundColor: Colors.redAccent,
+              backgroundColor: Colors.orangeAccent,
               child: Text(
                 '$quantity',
                 style: TextStyle(color: Colors.white),

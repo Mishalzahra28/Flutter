@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'MyShop',
-        theme: ThemeData(
-          primarySwatch: Colors.teal,
-        ),
+        // theme: ThemeData(
+        //   primarySwatch: Colors.black,
+        // ),
         // home: ProductsOverviewScreen(),
         routes: {
           "/": (context) => ProductsOverviewScreen(),

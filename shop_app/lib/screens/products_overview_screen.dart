@@ -18,6 +18,7 @@ class ProductsOverviewScreen extends StatelessWidget {
     final products = Provider.of<ProductProvider>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           title: Text("MyShop"),
           actions: [
             Consumer<Cart>(

@@ -10,13 +10,14 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: Column(children: [
         AppBar(
-          title: Text("Shop App"),
+          backgroundColor: Colors.black,
+          title: Text("MyShop"),
           automaticallyImplyLeading: false,
         ),
         Divider(),
         ListTile(
           leading: Icon(Icons.shop),
-          title: Text("Shop"),
+          title: Text("Shop", style: TextStyle(fontSize: 18)),
           onTap: () {
             Navigator.of(context).pushReplacementNamed("/");
           },
@@ -24,7 +25,10 @@ class AppDrawer extends StatelessWidget {
         Divider(),
         ListTile(
           leading: Icon(Icons.payment),
-          title: Text("Payments"),
+          title: Text(
+            "Payments",
+            style: TextStyle(fontSize: 18),
+          ),
           onTap: () {
             Navigator.of(context).pushReplacementNamed(OrderScreen.routeName);
           },

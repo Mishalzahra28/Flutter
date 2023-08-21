@@ -14,7 +14,8 @@ class ProductDetailScreen extends StatelessWidget {
         Provider.of<ProductProvider>(context, listen: false).getItem(productId);
 
     return Scaffold(
-      appBar: AppBar(title: Text(loadedItem.title)),
+      appBar:
+          AppBar(backgroundColor: Colors.black, title: Text(loadedItem.title)),
       body: Column(children: [
         Container(
           child: Image.network(
