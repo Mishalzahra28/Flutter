@@ -10,8 +10,33 @@ import "../widgets/appDrawer.dart";
 
 enum FilterOption { Favorite, All }
 
-class ProductsOverviewScreen extends StatelessWidget {
+class ProductsOverviewScreen extends StatefulWidget {
   ProductsOverviewScreen({super.key});
+
+  @override
+  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
+}
+
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+  var _isInit = true;
+  bool _isLoading = false;
+
+  // @override
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      Provider.of<ProductProvider>(context)
+          .getProducts()
+          .then((_) => setState(() {
+                _isLoading = false;
+              }));
+    }
+    _isInit = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +74,10 @@ class ProductsOverviewScreen extends StatelessWidget {
           ],
         ),
         drawer: AppDrawer(),
-        body: ProductGrid());
+        body: _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ProductGrid());
   }
 }
