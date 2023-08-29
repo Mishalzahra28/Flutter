@@ -1,28 +1,23 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:image_picker/image_picker.dart';
-import "package:firebase_storage/firebase_storage.dart";
 
-import "./login_screen.dart";
 import "../widget/CustomTextField.dart";
+import "./auth_screen.dart";
 
-class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  static const routeName='login';
+  const LoginScreen({super.key});
 
   @override
-  State<AuthScreen> createState() => _AuthScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   String email = "";
   String password = "";
-  String username = "";
-  File? pickedImageFile;
 
   void trySubmit() {
     final isValid = _formKey.currentState!.validate();
@@ -41,34 +36,11 @@ class _AuthScreenState extends State<AuthScreen> {
     password = value;
   }
 
-  void setUsername(String value) {
-    username = value;
-  }
-
   void Signup() async {
-    if (pickedImageFile == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            "Please pick an Image",
-          )));
-    }
     try {
       _isLoading = true;
       var authResult = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('user_image')
-          .child(authResult.user!.uid + '.jpg');
-      await ref.putFile(pickedImageFile as File);
-      final url = await ref.getDownloadURL();
-
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(authResult.user!.uid)
-          .set({"username": username, "email": email, 'image_url': url});
+          .signInWithEmailAndPassword(email: email, password: password);
     } on PlatformException catch (error) {
       _isLoading = false;
       var message = "An error occured. Please check credentials";
@@ -92,14 +64,6 @@ class _AuthScreenState extends State<AuthScreen> {
     _isLoading = false;
   }
 
-  void _pickImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      pickedImageFile = File(pickedImage!.path);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,10 +72,10 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Column(
           children: <Widget>[
             const SizedBox(
-              height: 25,
+              height: 50,
             ),
             const Padding(
-              padding: EdgeInsets.all(30.0),
+              padding: EdgeInsets.all(50.0),
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Center(
@@ -138,33 +102,19 @@ class _AuthScreenState extends State<AuthScreen> {
               ]),
             ),
             Card(
-              margin: EdgeInsets.symmetric(horizontal: 15),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 25.0, horizontal: 8),
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Colors.indigo.shade400,
-                      backgroundImage: pickedImageFile != null
-                          ? FileImage(pickedImageFile!)
-                          : null,
-                    ),
-                    TextButton.icon(
-                      onPressed: _pickImage,
-                      label: Text("Add Image"),
-                      icon: Icon(Icons.image),
-                    ),
-                    SizedBox(height: 10),
                     Form(
                       key: _formKey,
                       child: Column(children: [
                         CustomTextField(
-                            title: "USERNAME",
-                            setValue: setUsername,
+                            title: "EMAIL",
+                            setValue: setEmail,
                             hideText: false,
-                            hintText: "username"),
+                            hintText: "username@mail.com"),
                         const SizedBox(
                           height: 15.0,
                         ),
@@ -176,11 +126,6 @@ class _AuthScreenState extends State<AuthScreen> {
                         const SizedBox(
                           height: 15.0,
                         ),
-                        CustomTextField(
-                            title: "EMAIL",
-                            setValue: setEmail,
-                            hideText: false,
-                            hintText: "username@mail.com"),
                       ]),
                     ),
                     const SizedBox(
@@ -201,14 +146,14 @@ class _AuthScreenState extends State<AuthScreen> {
                                 foregroundColor: MaterialStateProperty.all<
                                         Color>(
                                     const Color.fromARGB(255, 255, 255, 255))),
-                            child: const Text("SIGN UP"),
+                            child: const Text("LOGIN"),
                           ),
                     TextButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
+                              builder: (ctx) => AuthScreen()));
                         },
-                        child: Text("Login"))
+                        child: Text("Create Account"))
                   ],
                 ),
               ),

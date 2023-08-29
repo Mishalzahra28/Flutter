@@ -9,6 +9,7 @@ import './screens/cart_screen.dart';
 import "./providers/orders.dart";
 import "./screens/order_screen.dart";
 import "./screens/auth_screen.dart";
+import "./providers/auth_provider.dart";
 
 void main() => runApp(MyApp());
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(
           create: (context) => ProductProvider(),
         ),
@@ -27,10 +29,6 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'MyShop',
-        // theme: ThemeData(
-        //   primarySwatch: Colors.black,
-        // ),
-        // home: ProductsOverviewScreen(),
         routes: {
           "/": (context) => AuthScreen(),
           ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
